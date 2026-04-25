@@ -42,7 +42,7 @@ Project structure:
 ├── silver_trans.py     # Silver Layer - Deduplication and data cleansing
 ├── gold_trans.py       # Gold Layer - Core SQL queries and aggregation
 ├── main.py             # Main execution and visualization
-└── webshop.db          # Adatbázis
+└── webshop.db          # Database
 
 Visualization:
 At the end of the workflow, the script automatically generates a summary chart based on the prepared SQL data, highlighting the company's most valuable customers.
