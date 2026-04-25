@@ -36,7 +36,7 @@ pip install pandas matplotlib sqlalchemy
 python main.py
 
 
-Projekt struktúra:
+Project structure:
 .
 ├── bronz_trans.py      # Bronz Layer
 ├── silver_trans.py     # Silver Layer - Deduplication and data cleansing
@@ -44,7 +44,7 @@ Projekt struktúra:
 ├── main.py             # Main execution and visualization
 └── webshop.db          # Adatbázis
 
-Vizualizálás:
+Visualization:
 At the end of the workflow, the script automatically generates a summary chart based on the prepared SQL data, highlighting the company's most valuable customers.
 ![MVC](customer_revenue.png)
 
