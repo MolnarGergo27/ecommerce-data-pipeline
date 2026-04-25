@@ -1,56 +1,52 @@
 E-commerce Data Pipeline & Analytics (Medallion Architecture)
 
-Ez a projekt egy End-to-End adatfeldolgozási folyamatot mutat be, amely egy fiktív webshop nyers tranzakciós adataiból készít üzleti döntéstámogató riportokat. A projekt a modern adattárház-építésben használt Medallion Architecture elveit követi.
+This project demonstrates an end-to-end data processing pipeline that builds a database from a fictitious webshop's transaction data and generates business decision support reports. The project follows the principles of the modern Data Warehouse Medallion Architecture.
 
 
-Adat architektúra:
+Data architecure:
 1. Bronze layer:
-Nyers adatok beérkeznek az adatbázisba. Ebben az állapotban még tartalmaznak duplikációt, illetve hiányzó adatokat.
+Raw data is ingested into the database. In this state, it still contains duplicates and missing values.
 
 2. Silver layer:
-Ebben a rétegben történik az adattisztítás:
-- Duplikált szűrés: DISTINCT használatával
-- Hiányzó érték szűrés: COALESCE használatával pótolunk
-- Üzleti szűrés: Csak a sikeres adatokkal dolgozunk, amik 'cancelled' státuszúak, azokkal nem.
+This is where the cleansing occurs:
+- Removing duplicates: using DISTINCT
+- Handling missing values: replacing nulls using COALESCE
+- Business filtering: Processing only the succesful transanctions; the script ignores records with a 'cancelled' status
 
 3. Gold Layer:
-Aggregált riportok része, itt történnek a komplexebb SQL lekérdezések végrehajtása:
-- Customer Metrics -> Legértékesebb vásárló, rendelési gyakoriság, elköltött összeg
-- Prodcut Analytics -> Termékek bevétele és népszerűségük
+This layer executes complex SQL queries to create aggregated reports:
+- Customer Metrics -> Most valuable customer, order frequency and total amount spent 
+- Product Analytics -> Product revenue and popularity
 
 
-Technológiai Stack:
-- Python programozási nyelv
-- Adatbáis: SQLite
-- Könyvtárak: Pandas, SQLAlchemy, Matplotlib
+Tech Stack:
+- Language: Python
+- Database: SQLite
+- Libraries: Pandas, SQLAlchemy, Matplotlib
 
 
-Gyorsindítás:
-1. Repo clone
+Quick Start:
+1. Clone the Repository:
 git clone https://github.com/username/project-name
 
-2. Dependenciesek telepítése 
+2. Install Dependencies
 pip install pandas matplotlib sqlalchemy
 
-3. Fő script futtatás
+3. Execute the main script
 python main.py
 
 
 Projekt struktúra:
 .
 ├── bronz_trans.py      # Bronz Layer
-├── silver_trans.py     # Silver Layer - duplikáció és hibás adat detektálás
-├── gold_trans.py       # Gold Layer - fő SQL lekérdezések
-├── main.py             # Vizualizálás
+├── silver_trans.py     # Silver Layer - Deduplication and data cleansing
+├── gold_trans.py       # Gold Layer - Core SQL queries and aggregation
+├── main.py             # Main execution and visualization
 └── webshop.db          # Adatbázis
 
 Vizualizálás:
-A folyamat végén a szkript automatikusan generál egy összefoglaló grafikont az SQL-ben előkészített adatok alapján, amely megmutatja a cég legértékesebb vásárlóit.
-![Legértékesebb vásárlók](customer_revenue.png)
+At the end of the workflow, the script automatically generates a summary chart based on the prepared SQL data, highlighting the company's most valuable customers.
+![MVC](customer_revenue.png)
 
 
-Jövőbeli fejlesztések:
-- A lokális adatok helyett egy API használatával az adatok kicserélése, hogy az adatbázis nagyobb és relevánsabb legyen.
-
-
-Készítette: Molnár Gergő - https://www.linkedin.com/in/gerg%C5%91-moln%C3%A1r-3920b53a7/
+Created by: Molnár Gergő - https://www.linkedin.com/in/gerg%C5%91-moln%C3%A1r-3920b53a7/
